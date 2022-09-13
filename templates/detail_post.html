@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_page.html' %}
 
-</body>
-</html>
+{%block logo%}
+							<div id="logo">
+								<h1><a href="{% url 'index'%}"></a></h1>
+
+							</div>
+{%endblock logo%}
+
+{% block index %}
+<h1>{{post.name}}</h1>
+<p>{{post.description}}</p>
+<img src="{{post.image.url}}">"post image"</img>
+<p>{{post.author}}</p>
+
+{%endblock%}
