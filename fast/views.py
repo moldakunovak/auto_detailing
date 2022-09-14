@@ -3,7 +3,10 @@ from django.views.generic import TemplateView
 from django.shortcuts import render
 from django.views import generic
 from django.urls import reverse
-from fast.models import Post
+from django.shortcuts import render, redirect, get_object_or_404
+
+from accounts.forms import UserForm
+from fast.models import Post, User
 from fast.forms import CreatePostForm
 from django.db.models import Q
 
@@ -42,3 +45,20 @@ class DetailPostView(generic.DetailView):
 
     def get_queryset(self):
         return Post.objects.all()
+
+def update_author(request, id):
+    author = User.objects.filter(id=id).first()
+    form = UserForm(request.POST or None, instance=author)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('main')
+    return render(request, 'update.html', locals())
+
+def delete_author(request, id):
+    author = get_object_or_404(User, id=id)
+    if request.method == 'POST':
+        author.delete()
+
+        return redirect('main')
+    return render(request, 'delete.html', locals())

@@ -2920,10 +2920,3 @@ input, select, textarea {
     align-items: center;
 }
 
-#title {
-    width: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
